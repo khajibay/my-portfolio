@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kamran Hajibayli — Chemical Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0a0c0f;
+    --surface: #111418;
+    --surface2: #181c22;
+    --border: #1e2530;
+    --border2: #2a3340;
+    --accent: #00d4aa;
+    --accent2: #0099ff;
+    --accent3: #ff6b35;
+    --text: #e8edf2;
+    --text2: #8a9ab0;
+    --text3: #4a5a6e;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 14px; line-height: 1.6; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,12,15,0.94); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 52px;
+  }
+  .nav-logo { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 0; list-style: none; }
+  .nav-links a {
+    display: block; padding: 0 0.85rem; height: 52px; line-height: 52px;
+    font-family: var(--mono); font-size: 10px; color: var(--text2);
+    text-decoration: none; letter-spacing: 0.08em;
+    border-left: 1px solid var(--border);
+    transition: color 0.15s, background 0.15s;
+  }
+  .nav-links a:hover { color: var(--accent); background: rgba(0,212,170,0.05); }
+
+  section { padding: 4.5rem 2rem; max-width: 900px; margin: 0 auto; }
+
+  .section-label {
+    font-family: var(--mono); font-size: 10px; color: var(--accent);
+    letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.4rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border2); max-width: 60px; }
+  h2 { font-size: 26px; font-weight: 600; color: var(--text); margin-bottom: 2rem; letter-spacing: -0.02em; }
+
+  /* HERO */
+  #hero {
+    min-height: calc(100vh - 52px); display: flex; flex-direction: column;
+    justify-content: center; padding: 4rem 2rem; max-width: 900px; margin: 0 auto;
+  }
+  .hero-prefix { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.2em; margin-bottom: 1rem; }
+  .hero-name { font-size: clamp(34px, 5.5vw, 60px); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
+  .hero-title { font-size: clamp(15px, 2.2vw, 20px); font-weight: 300; color: var(--text2); margin-bottom: 1.5rem; }
+  .hero-title span { color: var(--accent2); font-weight: 400; }
+  .hero-desc { font-size: 14px; color: var(--text2); max-width: 560px; line-height: 1.7; margin-bottom: 2rem; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 2.5rem; }
+  .tag { font-family: var(--mono); font-size: 10px; padding: 4px 10px; border: 1px solid var(--border2); color: var(--text2); background: var(--surface); }
+  .tag.accent { border-color: rgba(0,212,170,0.4); color: var(--accent); background: rgba(0,212,170,0.05); }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; padding: 10px 20px; text-decoration: none; cursor: pointer; border: none; transition: all 0.15s; }
+  .btn-primary { background: var(--accent); color: #0a0c0f; font-weight: 600; }
+  .btn-primary:hover { background: #00ffcc; }
+  .btn-ghost { background: transparent; color: var(--text2); border: 1px solid var(--border2); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 3rem; }
+  .stat { background: var(--surface); padding: 1.25rem; text-align: center; }
+  .stat-num { font-family: var(--mono); font-size: 20px; font-weight: 600; color: var(--accent); display: block; }
+  .stat-label { font-size: 10px; color: var(--text3); letter-spacing: 0.07em; margin-top: 2px; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .about-cell { background: var(--surface); padding: 1.5rem; }
+  .about-cell.full { grid-column: span 2; }
+  .about-cell h3 { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.15em; margin-bottom: 0.75rem; }
+  .about-cell p { color: var(--text2); font-size: 13px; line-height: 1.7; }
+  .lang-row { display: flex; align-items: center; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid var(--border); }
+  .lang-row:last-child { border-bottom: none; }
+  .lang-name { font-size: 13px; color: var(--text); }
+  .lang-level { font-family: var(--mono); font-size: 10px; color: var(--accent2); }
+
+  /* EDUCATION */
+  .edu-item { border: 1px solid var(--border); border-bottom: none; background: var(--surface); padding: 1.5rem; display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; }
+  .edu-item:last-child { border-bottom: 1px solid var(--border); }
+  .edu-school { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+  .edu-degree { font-size: 13px; color: var(--text2); margin-bottom: 6px; }
+  .edu-details { font-family: var(--mono); font-size: 10px; color: var(--text3); display: flex; gap: 10px; flex-wrap: wrap; }
+  .edu-details span { color: var(--accent); }
+  .edu-year { font-family: var(--mono); font-size: 11px; color: var(--text3); white-space: nowrap; padding-top: 2px; }
+
+  /* EXPERIENCE */
+  .exp-item { display: grid; grid-template-columns: 130px 1fr; border: 1px solid var(--border); border-bottom: none; background: var(--surface); }
+  .exp-item:last-child { border-bottom: 1px solid var(--border); }
+  .exp-timeline { border-right: 1px solid var(--border); padding: 1.5rem 1rem; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+  .exp-year { font-family: var(--mono); font-size: 10px; color: var(--text3); line-height: 1.4; }
+  .exp-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-top: 4px; }
+  .exp-content { padding: 1.5rem; }
+  .exp-role { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+  .exp-company { font-family: var(--mono); font-size: 10px; color: var(--accent2); margin-bottom: 10px; letter-spacing: 0.05em; }
+  .exp-bullets { list-style: none; }
+  .exp-bullets li { font-size: 12px; color: var(--text2); padding: 2px 0 2px 14px; position: relative; }
+  .exp-bullets li::before { content: '›'; position: absolute; left: 0; color: var(--accent); font-family: var(--mono); }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .skill-group { background: var(--surface); padding: 1.25rem; }
+  .skill-group h3 { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.15em; margin-bottom: 1rem; }
+  .skill-pill { display: inline-block; font-family: var(--mono); font-size: 10px; color: var(--text2); background: var(--surface2); border: 1px solid var(--border2); padding: 3px 8px; margin: 2px; letter-spacing: 0.04em; }
+
+  /* RESEARCH */
+  .project-item { border: 1px solid var(--border); border-bottom: none; background: var(--surface); padding: 1.5rem; }
+  .project-item:last-child { border-bottom: 1px solid var(--border); }
+  .project-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px; gap: 1rem; }
+  .project-title { font-size: 14px; font-weight: 500; color: var(--text); }
+  .project-badge { font-family: var(--mono); font-size: 9px; padding: 3px 8px; letter-spacing: 0.1em; white-space: nowrap; }
+  .badge-research { background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); color: var(--accent2); }
+  .project-desc { font-size: 12px; color: var(--text2); margin-bottom: 10px; line-height: 1.6; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .project-tag { font-family: var(--mono); font-size: 9px; color: var(--text3); border: 1px solid var(--border); padding: 2px 7px; }
+
+  /* PUBLICATIONS */
+  .pub-item { border: 1px solid var(--border); border-bottom: none; background: var(--surface); padding: 1.25rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start; }
+  .pub-item:last-child { border-bottom: 1px solid var(--border); }
+  .pub-num { font-family: var(--mono); font-size: 11px; color: var(--text3); min-width: 24px; padding-top: 1px; }
+  .pub-title { font-size: 13px; color: var(--text); margin-bottom: 3px; font-weight: 500; }
+  .pub-venue { font-family: var(--mono); font-size: 10px; color: var(--accent3); letter-spacing: 0.06em; margin-bottom: 3px; }
+  .pub-authors { font-size: 11px; color: var(--text3); }
+
+  /* AWARDS */
+  .award-item { border: 1px solid var(--border); border-bottom: none; background: var(--surface); padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .award-item:last-child { border-bottom: 1px solid var(--border); }
+  .award-name { font-size: 13px; color: var(--text); }
+  .award-year { font-family: var(--mono); font-size: 11px; color: var(--accent); white-space: nowrap; }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .contact-item { background: var(--surface); padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 1rem; text-decoration: none; transition: background 0.15s; cursor: pointer; }
+  .contact-item:hover { background: var(--surface2); }
+  .contact-icon { font-family: var(--mono); font-size: 16px; color: var(--accent); width: 28px; text-align: center; }
+  .contact-label { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: 0.1em; margin-bottom: 2px; }
+  .contact-value { font-size: 13px; color: var(--text2); }
+
+  footer { border-top: 1px solid var(--border); padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; max-width: 900px; margin: 0 auto; }
+  .footer-copy { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: 0.08em; }
+  .footer-copy span { color: var(--accent); }
+
+  .grid-bg { position: fixed; inset: 0; background-image: linear-gradient(rgba(0,212,170,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,170,0.025) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; z-index: 0; }
+  .content-wrap { position: relative; z-index: 1; }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 1rem; }
+    .nav-links { display: none; }
+    section { padding: 3rem 1rem; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .about-grid, .skills-grid, .contact-grid { grid-template-columns: 1fr; }
+    .about-cell.full { grid-column: span 1; }
+    .exp-item { grid-template-columns: 1fr; }
+    .exp-timeline { border-right: none; border-bottom: 1px solid var(--border); flex-direction: row; align-items: center; padding: 0.75rem 1.5rem; }
+    .edu-item { grid-template-columns: 1fr; }
+    .project-header { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="content-wrap">
+
+<nav>
+  <div class="nav-logo">KH // portfolio</div>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#education">education</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#research">research</a></li>
+    <li><a href="#publications">presentations</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#awards">awards</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-prefix">// chemical engineer · energy · semiconductors</p>
+  <h1 class="hero-name">Kamran<br>Hajibayli</h1>
+  <p class="hero-title">M.S. Candidate — <span>UC San Diego</span> · Dec 2026</p>
+  <p class="hero-desc">Chemical engineer specializing in electrochemical energy systems, nanomaterial synthesis, and process engineering. From coal-to-gas transitions at AES Indiana to solar-to-hydrogen modeling for the Azerbaijani Ministry of Energy — bridging lab-scale materials science with large-scale industrial impact.</p>
+  <div class="hero-tags">
+    <span class="tag accent">STEM OPT eligible · 3 yrs</span>
+    <span class="tag">thin-film photovoltaics</span>
+    <span class="tag">process simulation</span>
+    <span class="tag">nanoparticle synthesis</span>
+    <span class="tag">semiconductor fabrication</span>
+    <span class="tag">energy transition</span>
+    <span class="tag">P&ID / AutoCAD</span>
+  </div>
+  <div class="hero-cta">
+    <a href="#contact" class="btn btn-primary">get in touch</a>
+    <a href="#experience" class="btn btn-ghost">view experience</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">3.4</span><span class="stat-label">Purdue GPA</span></div>
+    <div class="stat"><span class="stat-num">3</span><span class="stat-label">AIChE conf.</span></div>
+    <div class="stat"><span class="stat-num">$7M+</span><span class="stat-label">projects supported</span></div>
+    <div class="stat"><span class="stat-num">4</span><span class="stat-label">languages</span></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">01</div>
+  <h2>About</h2>
+  <div class="about-grid">
+    <div class="about-cell full">
+      <h3>// background</h3>
+      <p>M.S. Chemical Engineering candidate at UC San Diego (Jacobs School of Engineering), graduating December 2026, with a 3.2 GPA. B.S. Chemical Engineering from Purdue University (3.4 GPA), with a Minor in Chemistry and a Semiconductor Device Certificate. My work spans nanomaterial synthesis for thin-film PV, process engineering for energy transition, and solar-to-hydrogen pathway modeling. I serve as GPSA Departmental Representative for Chemical &amp; Nano Engineering and President of the Azerbaijani Student Association at UCSD.</p>
+    </div>
+    <div class="about-cell">
+      <h3>// languages</h3>
+      <div class="lang-row"><span class="lang-name">English</span><span class="lang-level">fluent</span></div>
+      <div class="lang-row"><span class="lang-name">Azerbaijani</span><span class="lang-level">native</span></div>
+      <div class="lang-row"><span class="lang-name">Turkish</span><span class="lang-level">fluent</span></div>
+      <div class="lang-row"><span class="lang-name">Russian</span><span class="lang-level">fluent</span></div>
+    </div>
+    <div class="about-cell">
+      <h3>// leadership</h3>
+      <p style="font-size:12px;">GPSA Departmental Rep. · UCAB Graduate At-Large · AZSA President (UCSD) · AZESA Advisor (Purdue) · AIChE Treasurer (Purdue) · Omega Chi Epsilon · AIChE Honorary Award 2025</p>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">02</div>
+  <h2>Education</h2>
+  <div class="edu-item">
+    <div>
+      <div class="edu-school">University of California, San Diego</div>
+      <div class="edu-degree">M.S. Chemical Engineering · Energy Concentration · Jacobs School of Engineering</div>
+      <div class="edu-details"><span>GPA: 3.2 / 4.0</span> · electrochemical energy · nanomaterials · grid systems</div>
+    </div>
+    <div class="edu-year">Sep 2025 –<br>Dec 2026</div>
+  </div>
+  <div class="edu-item">
+    <div>
+      <div class="edu-school">Purdue University — College of Engineering</div>
+      <div class="edu-degree">B.S. Chemical Engineering · Minor: Chemistry · Semiconductor Device Certificate</div>
+      <div class="edu-details"><span>GPA: 3.4 / 4.0</span> · SURF Fellow · AIChE Treasurer · Omega Chi Epsilon · OUR Scholar</div>
+    </div>
+    <div class="edu-year">Aug 2021 –<br>May 2025</div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">03</div>
+  <h2>Work Experience</h2>
+
+  <div class="exp-item">
+    <div class="exp-timeline"><div class="exp-year">May–Sep<br>2025</div><div class="exp-dot"></div></div>
+    <div class="exp-content">
+      <div class="exp-role">Process Engineering Intern — Solar Division</div>
+      <div class="exp-company">AZERBAIJANI RENEWABLE ENERGY AGENCY (AREA) · Ministry of Energy · Baku, AZ</div>
+      <ul class="exp-bullets">
+        <li>Developed process simulation models for solar-to-hydrogen conversion pathways, supporting a $1M capital investment decision</li>
+        <li>Screened 7 candidate sites and identified 3 priority regions in a structured feasibility report</li>
+        <li>Collaborated across 4 energy transition initiatives with engineers, economists, and government officials</li>
+        <li>Quantified evaporation reduction rates for floating solar installations across 3 reservoir sites</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-timeline"><div class="exp-year">Aug 2022–<br>Aug 2023</div><div class="exp-dot"></div></div>
+    <div class="exp-content">
+      <div class="exp-role">Process Engineering Intern</div>
+      <div class="exp-company">AES CORPORATION (AES INDIANA) · Petersburg, IN</div>
+      <ul class="exp-bullets">
+        <li>Supported $6M coal-to-gas facility transition; audited process systems and updated P&amp;IDs across 4 units using AutoCAD</li>
+        <li>Analyzed steam data for 32 reheat sprays; monitored 200+ water samples reducing contaminant discharge from 12.5% → 9%</li>
+        <li>Identified 0.5-inch soda ash tank leak, reducing inspection time 40% and extending tank life 5+ years</li>
+        <li>Designed operational reporting tool adopted by 3 engineering teams (20+ engineers), improving efficiency 40%</li>
+        <li>Root cause analysis identified 4 bottlenecks; proposals reduced equipment downtime 10%</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-timeline"><div class="exp-year">Aug 2024–<br>May 2025</div><div class="exp-dot"></div></div>
+    <div class="exp-content">
+      <div class="exp-role">Teaching Assistant — Staged Separation Processes</div>
+      <div class="exp-company">PURDUE UNIVERSITY · Dept. of Chemical Engineering · West Lafayette, IN</div>
+      <ul class="exp-bullets">
+        <li>Supported 100+ students on distillation, absorption, and extraction concepts</li>
+        <li>Guided process simulation and equipment sizing assignments using Aspen Plus</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-timeline"><div class="exp-year">Aug 2022–<br>May 2025</div><div class="exp-dot"></div></div>
+    <div class="exp-content">
+      <div class="exp-role">Teaching Assistant &amp; Tutor — Introductory Engineering I &amp; II</div>
+      <div class="exp-company">PURDUE UNIVERSITY · School of Engineering Education · West Lafayette, IN</div>
+      <ul class="exp-bullets">
+        <li>Guided 120 students in MATLAB, regression analysis, algorithm development, and prototype creation</li>
+        <li>Evaluated 600+ assignments and projects; delivered detailed feedback to foster academic growth</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-label">04</div>
+  <h2>Research Experience</h2>
+
+  <div class="project-item">
+    <div class="project-header">
+      <div class="project-title">Prof. Agrawal's Solar Energy Research Group — Purdue University</div>
+      <span class="project-badge badge-research">AUG 2023 – MAY 2025</span>
+    </div>
+    <p class="project-desc">Designed 20+ experimental cycles optimizing Cu&#8322;(Ge,Si)S&#8323; nanoparticle synthesis — improving particle stability 12% and solar cell efficiency 6%. Engineered CIS solar cell band gap to 1.9 eV via 3-mercaptopropionic acid, reducing carbon contamination 60% through thioacetamide treatment. Applied hot-injection synthesis, selenization, and annealing to advance high-efficiency PV devices. Proposed revised UPW glass-washing procedure, reducing ultrapure water consumption 30%.</p>
+    <div class="project-tags">
+      <span class="project-tag">Cu&#8322;(Ge,Si)S&#8323; nanoparticles</span>
+      <span class="project-tag">hot-injection synthesis</span>
+      <span class="project-tag">band gap engineering</span>
+      <span class="project-tag">selenization</span>
+      <span class="project-tag">DOE / JMP</span>
+      <span class="project-tag">thin-film PV</span>
+    </div>
+  </div>
+
+  <div class="project-item">
+    <div class="project-header">
+      <div class="project-title">Summer Undergraduate Research Fellowship (SURF) — Purdue University</div>
+      <span class="project-badge badge-research">MAY – AUG 2024</span>
+    </div>
+    <p class="project-desc">Achieved low-temperature synthesis of (Ba,Sr)&#8322;ZrS&#8323; chalcogenide perovskite alloy at 350°C with precise control over solid-state reaction conditions. Characterized 6+ material compositions using pXRD, TEM, EDX, and XRF. Selected among 80+ SURF fellows to present findings to a multidisciplinary panel of faculty and industry professionals.</p>
+    <div class="project-tags">
+      <span class="project-tag">(Ba,Sr)&#8322;ZrS&#8323; perovskite</span>
+      <span class="project-tag">low-temp synthesis</span>
+      <span class="project-tag">pXRD · TEM · EDX · XRF</span>
+      <span class="project-tag">stoichiometry control</span>
+      <span class="project-tag">lead-free PV</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRESENTATIONS -->
+<section id="publications">
+  <div class="section-label">05</div>
+  <h2>Conference Presentations</h2>
+
+  <div class="pub-item">
+    <div class="pub-num">01</div>
+    <div>
+      <div class="pub-title">Colloidal Synthesis of Cu&#8322;(IV)S&#8323; (IV = Ge, Si) Nanoparticles for Thin Film Photovoltaic Device Fabrication</div>
+      <div class="pub-venue">AIChE NORTH CENTRAL REGIONAL CONFERENCE · POSTER · Columbus, OH · Apr 2024</div>
+      <div class="pub-authors">Kamran Hajibayli, Daniel Hayes, Rakesh Agrawal</div>
+    </div>
+  </div>
+
+  <div class="pub-item">
+    <div class="pub-num">02</div>
+    <div>
+      <div class="pub-title">Solution-Processed Synthesis and Characterization of Chalcogenide Perovskite Nanomaterials: The Case of (Ba&#8339;Sr&#8321;&#8331;&#8339;)ZrS&#8323;</div>
+      <div class="pub-venue">SURF CONFERENCE · ORAL PRESENTATION · West Lafayette, IN · Jun 2024</div>
+      <div class="pub-authors">Kamran Hajibayli, Daniel Hayes, Rakesh Agrawal</div>
+    </div>
+  </div>
+
+  <div class="pub-item">
+    <div class="pub-num">03</div>
+    <div>
+      <div class="pub-title">Solution-Processed Synthesis and Characterization of Chalcogenide Perovskite Nanomaterials: The Case of (Ba&#8339;Sr&#8321;&#8331;&#8339;)ZrS&#8323;</div>
+      <div class="pub-venue">AIChE NATIONAL CONFERENCE · POSTER · San Diego, CA · Oct 2024</div>
+      <div class="pub-authors">Kamran Hajibayli, Daniel Hayes, Rakesh Agrawal</div>
+    </div>
+  </div>
+
+  <div class="pub-item">
+    <div class="pub-num">04</div>
+    <div>
+      <div class="pub-title">The Evolution of Renewable Energy: A Focus on Solar Power Generation</div>
+      <div class="pub-venue">STEAM ABC NATIONAL CONFERENCE FOR STEM · POSTER · Baku, Azerbaijan · Dec 2016</div>
+      <div class="pub-authors">Kamran Hajibayli, Hasan Mustafabayli</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">06</div>
+  <h2>Technical Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h3>// process engineering</h3>
+      <span class="skill-pill">Aspen Plus</span>
+      <span class="skill-pill">AutoCAD</span>
+      <span class="skill-pill">P&amp;ID development</span>
+      <span class="skill-pill">PFD analysis</span>
+      <span class="skill-pill">equipment sizing</span>
+      <span class="skill-pill">energy balances</span>
+      <span class="skill-pill">HAZOP</span>
+      <span class="skill-pill">risk assessment</span>
+    </div>
+    <div class="skill-group">
+      <h3>// materials &amp; characterization</h3>
+      <span class="skill-pill">pXRD</span>
+      <span class="skill-pill">TEM</span>
+      <span class="skill-pill">SEM</span>
+      <span class="skill-pill">XRF</span>
+      <span class="skill-pill">EDX</span>
+      <span class="skill-pill">nanoparticle synthesis</span>
+      <span class="skill-pill">thin-film characterization</span>
+      <span class="skill-pill">UPW handling</span>
+    </div>
+    <div class="skill-group">
+      <h3>// software &amp; data</h3>
+      <span class="skill-pill">MATLAB</span>
+      <span class="skill-pill">Python</span>
+      <span class="skill-pill">JMP</span>
+      <span class="skill-pill">DOE / stat. analysis</span>
+      <span class="skill-pill">MS Office</span>
+      <span class="skill-pill">AutoCAD</span>
+    </div>
+    <div class="skill-group">
+      <h3>// lab &amp; semiconductor</h3>
+      <span class="skill-pill">cleanroom protocol</span>
+      <span class="skill-pill">semiconductor fabrication</span>
+      <span class="skill-pill">chemical handling</span>
+      <span class="skill-pill">OSHA compliance</span>
+      <span class="skill-pill">hot-injection synthesis</span>
+      <span class="skill-pill">selenization</span>
+      <span class="skill-pill">annealing</span>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="section-label">07</div>
+  <h2>Honors &amp; Awards</h2>
+  <div class="award-item"><span class="award-name">AIChE Honorary Award for Service to Chemical Engineering Department</span><span class="award-year">2025</span></div>
+  <div class="award-item"><span class="award-name">OUR (Office of Undergraduate Research) Scholarship — Purdue</span><span class="award-year">2024</span></div>
+  <div class="award-item"><span class="award-name">SURF (Summer Undergraduate Research Fellowship) Fellow — Purdue</span><span class="award-year">2024</span></div>
+  <div class="award-item"><span class="award-name">William C. &amp; Linda E. Nelson Scholarship for Active Internship Experience</span><span class="award-year">2023</span></div>
+  <div class="award-item"><span class="award-name">Gold Medal — High School Science Fair (Solar Energy Research)</span><span class="award-year">2016</span></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">08</div>
+  <h2>Contact</h2>
+  <div class="contact-grid">
+    <a href="mailto:hajibaylikamran@gmail.com" class="contact-item">
+      <div class="contact-icon">@</div>
+      <div><div class="contact-label">email</div><div class="contact-value">hajibaylikamran@gmail.com</div></div>
+    </a>
+    <a href="tel:+13129006384" class="contact-item">
+      <div class="contact-icon">☎</div>
+      <div><div class="contact-label">phone</div><div class="contact-value">+1 312 900 6384</div></div>
+    </a>
+    <a href="https://linkedin.com/in/kamran-hajibayli" target="_blank" class="contact-item">
+      <div class="contact-icon">in</div>
+      <div><div class="contact-label">linkedin</div><div class="contact-value">linkedin.com/in/kamran-hajibayli</div></div>
+    </a>
+    <div class="contact-item">
+      <div class="contact-icon">◎</div>
+      <div><div class="contact-label">location</div><div class="contact-value">La Jolla, CA · open to relocation</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copy">© 2026 <span>Kamran Hajibayli</span> — chemical engineer</div>
+  <div class="footer-copy">La Jolla, CA</div>
+</footer>
+
+</div>
+</body>
+</html>
